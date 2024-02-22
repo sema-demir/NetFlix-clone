@@ -7,12 +7,13 @@ const initialState = {
 };
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
+    //yüklenme
     case actionTypes.MOVIES_LOADING:
       return { ...state, isLoading: true };
-
+    //hata alma
     case actionTypes.MOVIES_ERROR:
       return { ...state, isLoading: true, isError: action.payload };
-
+    // istek sonucu basrılı olursa
     case actionTypes.MOVIES_SUCCESS:
       return {
         ...state,

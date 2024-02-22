@@ -5,13 +5,15 @@ import DetailPage from "./pages/DetailPage";
 
 const App = () => {
   return (
-    <div>
+    <div className="p-5 md:p-10 lg:p-15 xl:px-20">
       <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/film/:id" element={<DetailPage />} />
-        </Routes>
+        <div>
+          <Header />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/film/:id" element={<DetailPage />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

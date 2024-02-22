@@ -1,44 +1,46 @@
 import { useSelector } from "react-redux";
 import { baseImgUrl } from "../constants";
-//storeda tutulan veriye eriş
+import Loader from "./Loader";
+
 const Hero = () => {
+  // store'da tutulan veriler eriş
   const store = useSelector((store) => store.movieReducer);
-  //1-19 arasında rastgele sayı üret
+
+  // 0 - 19 arqasında rastgele sayı üreet
   const i = Math.floor(Math.random() * 20);
 
-  //ratgele üretilen sıradaki filme eriş
+  // rastegele üretilen sıradaki filme eriş
   const randomMovie = store.popularMovies[i];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 md:max-h-[400px] gap-5 mb-10">
       {!randomMovie ? (
-        <p>Yükleniyor</p>
+        //rastagele video yoksa yukleniyor bas
+        <Loader />
       ) : (
         <>
-          <div className="grid my-2 ">
-            <h1 className="text-center text-xl p-5 mx-2">
-              {randomMovie.title}
-            </h1>
-            <p className="text-justify mx-5">{randomMovie.overview}</p>
-            <div className="flex items-center space-x-2 ">
-              <span className=" ">IMDB: </span>
+          <div className="flex flex-col gap-6 items-center justify-center">
+            <h1 className="text-3xl font-bold">{randomMovie.title}</h1>
+            <p className=" text-start ">{randomMovie.overview}</p>
+            <p>
+              <span>IMDB: </span>
               <span className="text-yellow-400">
                 {randomMovie.vote_average.toFixed(1)}
               </span>
+            </p>
+
+            <div className="flex gap-5">
+              <button className="p-2 bg-red-600 rounded hover:bg-red-700">
+                Filmi İzle
+              </button>
+              <button className="p-2 bg-blue-600 rounded hover:bg-blue-700">
+                Listeye Ekle
+              </button>
             </div>
           </div>
-          <div className="flex items-center justify-center space-x-2">
-            <button className="bg-red-600 text-white font-bold py-2 px-4 rounded my-2">
-              Filmi İzle
-            </button>
-            <button className="bg-cyan-700 text-white font-bold py-2 px-4 rounded my-2">
-              Listeye Ekle
-            </button>
-          </div>
-
-          <div className="">
+          <div className="flex justify-center">
             <img
-              className="p-5 "
+              className="my-4 img-fluid object-contain rounded hero-img max-h-[300px]"
               src={baseImgUrl.concat(randomMovie.backdrop_path)}
               alt={randomMovie.title}
             />
